@@ -74,9 +74,7 @@ wss.on('connection', function connection(userSocket) {
       }
       const groupIdstr = data.groupId.toString();
       
-      if (!reverseUsers[groupIdstr]!.userIds.includes(UserId)) {
-        reverseUsers[groupIdstr]!.userIds.push(UserId);
-      }
+     
       // IF THIS IS THE FIRST USER TO SUBSCRIBE TO THIS GROUP, WE NEED TO SUBSCRIBE TO THE REDIS CHANNEL
 
       if (!reverseUsers[groupIdstr]) {
@@ -107,6 +105,10 @@ wss.on('connection', function connection(userSocket) {
         });
 
         console.log(`Subscribed to Redis channel: ${groupIdstr}`);
+      }
+      
+       if (!reverseUsers[groupIdstr]!.userIds.includes(UserId)) {
+        reverseUsers[groupIdstr]!.userIds.push(UserId);
       }
 
 
